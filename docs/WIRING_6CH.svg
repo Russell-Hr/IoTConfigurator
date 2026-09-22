@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200">
+<defs><style>
+.title{font:700 34px Arial,sans-serif;fill:#10233f}.sub{font:18px Arial,sans-serif;fill:#40516a}.h{font:700 22px Arial,sans-serif;fill:#10233f}.t{font:16px Arial,sans-serif;fill:#20344f}.sm{font:14px Arial,sans-serif;fill:#50627b}.box{fill:#f7faff;stroke:#31577e;stroke-width:2}.head{fill:#12375e}.headt{font:700 20px Arial,sans-serif;fill:white}.pin{fill:#edf4fb;stroke:#9ab2cb;stroke-width:1.5}.safe{fill:#eff9f3;stroke:#4f8c69;stroke-width:2}.warn{fill:#fff8e5;stroke:#b28a34;stroke-width:2}.danger{fill:#fff0f0;stroke:#a85050;stroke-width:2}.line{stroke:#426b91;stroke-width:4;fill:none}.i2c{stroke:#c08a22;stroke-width:3;fill:none}.wire{stroke:#b04d4d;stroke-width:3;fill:none}.dash{stroke-dasharray:10 8}.tbl{fill:#fff;stroke:#aabed2;stroke-width:1}.tb{font:700 13px Arial,sans-serif;fill:#20344f}.tc{font:13px Arial,sans-serif;fill:#20344f}.green{stroke:#3f8c61;stroke-width:3;fill:none}.blue{stroke:#3779bb;stroke-width:3;fill:none}.red{stroke:#c74343;stroke-width:3;fill:none}.black{stroke:#20252b;stroke-width:3;fill:none}
+</style></defs>
+<rect width="1800" height="1200" fill="white"/>
+<rect x="35" y="28" width="1730" height="92" rx="18" fill="#102f50"/>
+<text x="70" y="70" class="title" fill="white">HeatControl v0.16 · 6-канальний контролер опалення</text>
+<text x="70" y="100" class="sub" fill="#d8e7f7">ESP32 DevKit V1 + DS18B20 ×7 + DS3231 + EXT GPIO (MCP23017) для кінцевих вимикачів</text>
+
+<!-- ESP32 -->
+<rect x="45" y="150" width="440" height="500" rx="18" class="box"/>
+<rect x="45" y="150" width="440" height="48" rx="18" class="head"/><text x="70" y="181" class="headt">ESP32 DevKit V1 · точна розпіновка</text>
+<g>
+<rect x="70" y="220" width="390" height="32" rx="7" class="pin"/><text x="85" y="242" class="t">GPIO 4  →  1-Wire DS18B20 ×7</text>
+<rect x="70" y="260" width="390" height="32" rx="7" class="pin"/><text x="85" y="282" class="t">GPIO 5  →  AUX TEN relay</text>
+<rect x="70" y="300" width="390" height="32" rx="7" class="pin"/><text x="85" y="322" class="t">GPIO 21 → I²C SDA (DS3231 + EXT GPIO)</text>
+<rect x="70" y="340" width="390" height="32" rx="7" class="pin"/><text x="85" y="362" class="t">GPIO 22 → I²C SCL (DS3231 + EXT GPIO)</text>
+<rect x="70" y="380" width="390" height="32" rx="7" class="pin"/><text x="85" y="402" class="t">GPIO 16 / 17 → CH1 OUT-A / OUT-B</text>
+<rect x="70" y="420" width="390" height="32" rx="7" class="pin"/><text x="85" y="442" class="t">GPIO 18 / 19 → CH2 OUT-A / OUT-B</text>
+<rect x="70" y="460" width="390" height="32" rx="7" class="pin"/><text x="85" y="482" class="t">GPIO 23 / 25 → CH3 OUT-A / OUT-B</text>
+<rect x="70" y="500" width="390" height="32" rx="7" class="pin"/><text x="85" y="522" class="t">GPIO 26 / 27 → CH4 OUT-A / OUT-B</text>
+<rect x="70" y="540" width="390" height="32" rx="7" class="pin"/><text x="85" y="562" class="t">GPIO 32 / 33 → CH5 OUT-A / OUT-B</text>
+<rect x="70" y="580" width="390" height="32" rx="7" class="pin"/><text x="85" y="602" class="t">GPIO 13 / 14 → CH6 OUT-A / OUT-B</text>
+</g>
+<rect x="70" y="625" width="390" height="48" rx="10" class="warn"/><text x="85" y="647" class="sm">GPIO5 — strapping pin: AUX relay input не повинен</text><text x="85" y="665" class="sm">змінювати рівень, необхідний під час завантаження.</text>
+
+<!-- DS18 -->
+<rect x="535" y="150" width="430" height="260" rx="18" class="safe"/>
+<rect x="535" y="150" width="430" height="48" rx="18" fill="#2f7255"/><text x="560" y="181" class="headt">DS18B20 ×7 · один 1-Wire bus</text>
+<text x="560" y="225" class="t">DATA → ESP32 GPIO4</text><text x="560" y="252" class="t">VDD → 3.3 V · GND → GND</text><text x="560" y="279" class="t">4.7 kΩ pull-up: DATA → 3.3 V</text>
+<text x="560" y="318" class="sm">CH1, CH2, CH3, CH4, CH5, CH6 — канальні датчики</text><text x="560" y="342" class="sm">№7 — OUTDOOR, окремий датчик зовнішньої температури</text><text x="560" y="370" class="sm">Кожен датчик визначається унікальним 64-біт ROM.</text>
+<path d="M485 236 H535" class="green"/>
+
+<!-- DS3231 + EXT GPIO -->
+<rect x="535" y="435" width="430" height="360" rx="18" class="box"/>
+<rect x="535" y="435" width="430" height="48" rx="18" class="head"/><text x="560" y="466" class="headt">I²C · DS3231 + EXT GPIO</text>
+<rect x="565" y="505" width="370" height="82" rx="12" class="pin"/><text x="585" y="532" class="h">DS3231 RTC</text><text x="585" y="558" class="t">SDA → GPIO21 · SCL → GPIO22</text><text x="585" y="580" class="sm">VCC 5 V · GND · батарейка RTC</text>
+<rect x="565" y="610" width="370" height="115" rx="12" class="safe"/><text x="585" y="637" class="h">EXT GPIO · MCP23017 @ 0x20</text><text x="585" y="663" class="t">SDA → GPIO21 · SCL → GPIO22</text><text x="585" y="686" class="t">12 входів кінцевих вимикачів</text><text x="585" y="708" class="sm">GPA0…GPA7 + GPB0…GPB3 · GPB4…GPB7 резерв</text>
+<text x="565" y="758" class="sm">EXT GPIO потрібен тільки для режиму LIMIT_SWITCH.</text>
+<path d="M485 316 H510 V545 H535" class="i2c"/><path d="M485 356 H500 V570 H535" class="i2c"/>
+
+<!-- Relay block -->
+<rect x="1005" y="150" width="365" height="645" rx="18" class="box"/>
+<rect x="1005" y="150" width="365" height="48" rx="18" class="head"/><text x="1030" y="181" class="headt">Релейні виходи</text>
+<text x="1030" y="220" class="h">12 виходів CH1…CH6</text>
+<g class="t">
+<text x="1030" y="252">R1  GPIO16  CH1 OPEN / HEAT</text><text x="1030" y="279">R2  GPIO17  CH1 CLOSE</text>
+<text x="1030" y="317">R3  GPIO18  CH2 OPEN / HEAT</text><text x="1030" y="344">R4  GPIO19  CH2 CLOSE</text>
+<text x="1030" y="382">R5  GPIO23  CH3 OPEN / HEAT</text><text x="1030" y="409">R6  GPIO25  CH3 CLOSE</text>
+<text x="1030" y="447">R7  GPIO26  CH4 OPEN / HEAT</text><text x="1030" y="474">R8  GPIO27  CH4 CLOSE</text>
+<text x="1030" y="512">R9  GPIO32  CH5 OPEN / HEAT</text><text x="1030" y="539">R10 GPIO33  CH5 CLOSE</text>
+<text x="1030" y="577">R11 GPIO13  CH6 OPEN / HEAT</text><text x="1030" y="604">R12 GPIO14  CH6 CLOSE</text>
+</g>
+<rect x="1030" y="635" width="315" height="115" rx="12" class="warn"/><text x="1050" y="662" class="h">AUX TEN</text><text x="1050" y="687" class="t">R13 → GPIO5</text><text x="1050" y="711" class="sm">Окремий допоміжний вихід контролера.</text><text x="1050" y="732" class="sm">Не є CH7.</text>
+
+<!-- actuators -->
+<rect x="1410" y="150" width="345" height="645" rx="18" class="box"/>
+<rect x="1410" y="150" width="345" height="48" rx="18" class="head"/><text x="1435" y="181" class="headt">Виконавчі пристрої</text>
+<text x="1435" y="225" class="h">Сервокран</text><text x="1435" y="252" class="t">OUT-A → OPEN</text><text x="1435" y="278" class="t">OUT-B → CLOSE</text><text x="1435" y="304" class="t">A=OFF, B=OFF → STOP</text>
+<text x="1435" y="340" class="sm">TIME: оцінка позиції за часом OPEN/CLOSE</text><text x="1435" y="363" class="sm">LIMIT_SWITCH: позицію визначають кінцевики</text>
+<rect x="1435" y="395" width="295" height="120" rx="12" class="pin"/><text x="1455" y="423" class="h">ТЕН / клапан</text><text x="1455" y="450" class="t">OUT-A → ON/OFF</text><text x="1455" y="476" class="sm">OUT-B не використовується.</text><text x="1455" y="498" class="sm">Підтримується інверсія виходу.</text>
+<rect x="1435" y="545" width="295" height="205" rx="12" class="danger"/><text x="1455" y="575" class="h">230 V</text><text x="1455" y="602" class="sm">Силову частину, захист, автомати,</text><text x="1455" y="626" class="sm">заземлення, переріз проводів,</text><text x="1455" y="650" class="sm">релейні контакти та підключення</text><text x="1455" y="674" class="sm">конкретного приводу перевіряє</text><text x="1455" y="698" class="sm">кваліфікований електрик.</text>
+
+<!-- limit switch map -->
+<rect x="45" y="835" width="1710" height="315" rx="18" class="safe"/>
+<rect x="45" y="835" width="1710" height="48" rx="18" fill="#2f7255"/><text x="70" y="866" class="headt">EXT GPIO (MCP23017) · точна карта 12 кінцевих вимикачів</text>
+<g>
+<rect x="70" y="905" width="810" height="215" class="tbl"/><rect x="70" y="905" width="810" height="34" fill="#dfeaf4"/>
+<text x="90" y="928" class="tb">MCP23017</text><text x="250" y="928" class="tb">Канал</text><text x="410" y="928" class="tb">Сигнал</text><text x="650" y="928" class="tb">Призначення</text>
+<g class="tc"><text x="90" y="960">GPA0</text><text x="250" y="960">CH1</text><text x="410" y="960">OPEN</text><text x="650" y="960">кінцевик відкрито</text>
+<text x="90" y="986">GPA1</text><text x="250" y="986">CH1</text><text x="410" y="986">CLOSE</text><text x="650" y="986">кінцевик закрито</text>
+<text x="90" y="1012">GPA2 / GPA3</text><text x="250" y="1012">CH2</text><text x="410" y="1012">OPEN / CLOSE</text><text x="650" y="1012">кінцевики CH2</text>
+<text x="90" y="1038">GPA4 / GPA5</text><text x="250" y="1038">CH3</text><text x="410" y="1038">OPEN / CLOSE</text><text x="650" y="1038">кінцевики CH3</text>
+<text x="90" y="1064">GPA6 / GPA7</text><text x="250" y="1064">CH4</text><text x="410" y="1064">OPEN / CLOSE</text><text x="650" y="1064">кінцевики CH4</text>
+<text x="90" y="1090">GPB0 / GPB1</text><text x="250" y="1090">CH5</text><text x="410" y="1090">OPEN / CLOSE</text><text x="650" y="1090">кінцевики CH5</text>
+<text x="90" y="1116">GPB2 / GPB3</text><text x="250" y="1116">CH6</text><text x="410" y="1116">OPEN / CLOSE</text><text x="650" y="1116">кінцевики CH6</text></g>
+<rect x="910" y="905" width="815" height="215" rx="12" class="box"/><text x="935" y="936" class="h">Підключення кінцевиків</text><text x="935" y="965" class="t">Один контакт кожного кінцевика → відповідний GPIO MCP23017.</text><text x="935" y="992" class="t">Другий контакт → GND.</text><text x="935" y="1019" class="t">Входи використовують внутрішні pull-up.</text><text x="935" y="1046" class="t">За замовчуванням активний рівень: LOW.</text><text x="935" y="1080" class="sm">Якщо одночасно активні OPEN і CLOSE одного каналу — firmware</text><text x="935" y="1102" class="sm">зупиняє клапан і виставляє fault.</text></g>
+</svg>
