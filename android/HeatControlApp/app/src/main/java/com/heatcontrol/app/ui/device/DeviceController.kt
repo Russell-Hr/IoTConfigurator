@@ -112,13 +112,13 @@ class DeviceController(
 
     fun valveCalibration(action: String, channelId: Int, initial: String? = null) = runAction({ it.valveCalibration(action, channelId, initial) })
 
-    fun updateOutdoorSensor(sensorRom: String, onDone: (Boolean) -> Unit = {}) = runAction({ it.updateOutdoorSensor(sensorRom) }, onDone)
+    fun updateOutdoorSensor(sensorRom: String, onDone: (Boolean) -> Unit = {}) = runAction({ it.updateOutdoorSensor(sensorRom); true }, onDone)
 
-    fun updateAux(enabled: Boolean, locationChannel: Int, channelMask: Int, maxRuntimeSeconds: Int, maxLocationTemp: Double, postReachPolicy: String, postReachMinutes: Int, postReachMaxSeconds: Int, onDone: (Boolean) -> Unit = {}) = runAction({ it.updateAux(enabled, locationChannel, channelMask, maxRuntimeSeconds, maxLocationTemp, postReachPolicy, postReachMinutes, postReachMaxSeconds) }, onDone)
+    fun updateAux(enabled: Boolean, locationChannel: Int, channelMask: Int, maxRuntimeSeconds: Int, maxLocationTemp: Double, postReachPolicy: String, postReachMinutes: Int, postReachMaxSeconds: Int, onDone: (Boolean) -> Unit = {}) = runAction({ it.updateAux(enabled, locationChannel, channelMask, maxRuntimeSeconds, maxLocationTemp, postReachPolicy, postReachMinutes, postReachMaxSeconds); true }, onDone)
 
     fun reboot() = runAction({ it.reboot() })
 
-    fun factoryReset(onDone: (Boolean) -> Unit = {}) = runAction({ it.factoryReset() }, onDone)
+    fun factoryReset(onDone: (Boolean) -> Unit = {}) = runAction({ it.factoryReset(); true }, onDone)
 
     fun syncNtp() = runAction({ it.syncNtp() })
 
